@@ -75,7 +75,7 @@ public class SignUpWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnSignIn.setFont(new Font("Arial", Font.BOLD, 20));
+		btnSignIn.setFont(new Font("Product Sans", Font.BOLD, 20));
 		btnSignIn.setForeground(Color.WHITE);
 		btnSignIn.setBackground(new Color(51, 153, 51));
 		btnSignIn.setBounds(480, 362, 151, 36);
@@ -91,7 +91,7 @@ public class SignUpWindow extends JFrame {
 		contentPane.add(separator);
 		
 		JLabel lblUserId = new JLabel("User ID");
-		lblUserId.setFont(new Font("Arial", Font.BOLD, 15));
+		lblUserId.setFont(new Font("Product Sans", Font.BOLD, 15));
 		lblUserId.setBounds(480, 116, 76, 23);
 		contentPane.add(lblUserId);
 		
@@ -105,7 +105,7 @@ public class SignUpWindow extends JFrame {
 		contentPane.add(separator_1);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setFont(new Font("Arial", Font.BOLD, 15));
+		lblPassword.setFont(new Font("Product Sans", Font.BOLD, 15));
 		lblPassword.setBounds(480, 192, 76, 23);
 		contentPane.add(lblPassword);
 		
@@ -118,7 +118,7 @@ public class SignUpWindow extends JFrame {
 			}
 		});
 		btnToNewAccountWindow.setForeground(Color.BLUE);
-		btnToNewAccountWindow.setFont(new Font("Arial", Font.ITALIC, 13));
+		btnToNewAccountWindow.setFont(new Font("Product Sans", Font.ITALIC, 13));
 		btnToNewAccountWindow.setBackground(new Color(51, 153, 51));
 		btnToNewAccountWindow.setBounds(630, 411, 161, 36);
 		btnToNewAccountWindow.setFocusPainted(false);
@@ -132,7 +132,7 @@ public class SignUpWindow extends JFrame {
 		JLabel lblWelcomeToXam = new JLabel("<html>Only registerd students can create an account through this window.<br/>Teachers have to meet an admin</html>");
 		lblWelcomeToXam.setVerticalAlignment(SwingConstants.TOP);
 		lblWelcomeToXam.setHorizontalAlignment(SwingConstants.LEFT);
-		lblWelcomeToXam.setFont(new Font("Arial", Font.BOLD, 15));
+		lblWelcomeToXam.setFont(new Font("Product Sans", Font.BOLD, 15));
 		lblWelcomeToXam.setBounds(480, 33, 311, 61);
 		contentPane.add(lblWelcomeToXam);
 		
@@ -146,7 +146,7 @@ public class SignUpWindow extends JFrame {
 		contentPane.add(separator_2);
 		
 		JLabel lblConfirmPassword = new JLabel("Confirm Password");
-		lblConfirmPassword.setFont(new Font("Arial", Font.BOLD, 15));
+		lblConfirmPassword.setFont(new Font("Product Sans", Font.BOLD, 15));
 		lblConfirmPassword.setBounds(480, 277, 129, 23);
 		contentPane.add(lblConfirmPassword);
 		

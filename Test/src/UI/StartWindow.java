@@ -74,7 +74,7 @@ public class StartWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnSignIn.setFont(new Font("Arial", Font.BOLD, 20));
+		btnSignIn.setFont(new Font("Product Sans", Font.BOLD, 20));
 		btnSignIn.setForeground(Color.WHITE);
 		btnSignIn.setBackground(new Color(51, 153, 51));
 		btnSignIn.setBounds(480, 362, 151, 36);
@@ -90,7 +90,7 @@ public class StartWindow extends JFrame {
 		contentPane.add(separator);
 		
 		JLabel lblUserId = new JLabel("User ID");
-		lblUserId.setFont(new Font("Arial", Font.BOLD, 15));
+		lblUserId.setFont(new Font("Product Sans", Font.BOLD, 15));
 		lblUserId.setBounds(480, 192, 76, 23);
 		contentPane.add(lblUserId);
 		
@@ -104,7 +104,7 @@ public class StartWindow extends JFrame {
 		contentPane.add(separator_1);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setFont(new Font("Arial", Font.BOLD, 15));
+		lblPassword.setFont(new Font("Product Sans", Font.BOLD, 15));
 		lblPassword.setBounds(480, 277, 76, 23);
 		contentPane.add(lblPassword);
 		
@@ -117,7 +117,7 @@ public class StartWindow extends JFrame {
 			}
 		});
 		btnToNewAccountWindow.setForeground(Color.BLUE);
-		btnToNewAccountWindow.setFont(new Font("Arial", Font.ITALIC, 13));
+		btnToNewAccountWindow.setFont(new Font("Product Sans", Font.ITALIC, 13));
 		btnToNewAccountWindow.setBackground(new Color(51, 153, 51));
 		btnToNewAccountWindow.setBounds(640, 411, 151, 36);
 		btnToNewAccountWindow.setFocusPainted(false);
@@ -130,17 +130,17 @@ public class StartWindow extends JFrame {
 		
 		JLabel lblWelcomeToXam = new JLabel("Welcome to X-AM!");
 		lblWelcomeToXam.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWelcomeToXam.setFont(new Font("Garamond", Font.BOLD, 30));
+		lblWelcomeToXam.setFont(new Font("Product Sans", Font.BOLD, 30));
 		lblWelcomeToXam.setBounds(480, 33, 311, 52);
 		contentPane.add(lblWelcomeToXam);
 		
 		JLabel lblIAmA = new JLabel("I am a");
-		lblIAmA.setFont(new Font("Arial", Font.BOLD, 15));
+		lblIAmA.setFont(new Font("Product Sans", Font.BOLD, 15));
 		lblIAmA.setBounds(480, 141, 50, 23);
 		contentPane.add(lblIAmA);
 		
 		JComboBox ComboUser = new JComboBox();
-		ComboUser.setFont(new Font("Arial", Font.PLAIN, 15));
+		ComboUser.setFont(new Font("Product Sans", Font.PLAIN, 15));
 		ComboUser.setModel(new DefaultComboBoxModel(new String[] {"Student", "Teacher", "Admin"}));
 		ComboUser.setBounds(529, 141, 133, 22);
 		contentPane.add(ComboUser);
