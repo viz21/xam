@@ -53,7 +53,7 @@ public class SignUpWindow extends JFrame {
 	public SignUpWindow() {
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 844, 507);
+		setBounds(100, 100, 850, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -78,7 +78,7 @@ public class SignUpWindow extends JFrame {
 		btnSignIn.setFont(new Font("Product Sans", Font.BOLD, 20));
 		btnSignIn.setForeground(Color.WHITE);
 		btnSignIn.setBackground(new Color(51, 153, 51));
-		btnSignIn.setBounds(480, 362, 151, 36);
+		btnSignIn.setBounds(480, 362, 150, 35);
 		contentPane.add(btnSignIn);
 		
 		txtUID = new JTextField();

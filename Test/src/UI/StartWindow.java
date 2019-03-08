@@ -52,7 +52,7 @@ public class StartWindow extends JFrame {
 	public StartWindow() {
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 844, 507);
+		setBounds(100, 100, 850, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
