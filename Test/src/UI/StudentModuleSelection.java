@@ -42,7 +42,7 @@ public class StudentModuleSelection extends JFrame {
 	 */
 	public StudentModuleSelection() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 920, 592);
+		setBounds(100, 100, 920, 590);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -56,7 +56,7 @@ public class StudentModuleSelection extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 119, 878, 317);
+		scrollPane.setBounds(12, 119, 890, 317);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -85,7 +85,7 @@ public class StudentModuleSelection extends JFrame {
 		btnNext.setFont(new Font("Product Sans", Font.BOLD, 20));
 		btnNext.setForeground(Color.WHITE);
 		btnNext.setBackground(new Color(51, 153, 51));
-		btnNext.setBounds(740, 449, 150, 35);
+		btnNext.setBounds(752, 449, 150, 35);
 		contentPane.add(btnNext);
 		
 		JSeparator separator = new JSeparator();
@@ -98,7 +98,7 @@ public class StudentModuleSelection extends JFrame {
 		contentPane.add(lblYourModules);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(181, 98, 709, 2);
+		separator_1.setBounds(181, 98, 721, 2);
 		contentPane.add(separator_1);
 		
 		setResizable(false);
