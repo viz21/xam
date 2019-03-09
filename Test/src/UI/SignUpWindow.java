@@ -23,13 +23,14 @@ import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JPasswordField;
 
 public class SignUpWindow extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtUID;
 	private JTextField txtPW;
-	private JTextField textField;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -136,11 +137,6 @@ public class SignUpWindow extends JFrame {
 		lblWelcomeToXam.setBounds(480, 33, 311, 61);
 		contentPane.add(lblWelcomeToXam);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(480, 313, 311, 36);
-		contentPane.add(textField);
-		
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setBounds(480, 347, 311, 2);
 		contentPane.add(separator_2);
@@ -149,6 +145,10 @@ public class SignUpWindow extends JFrame {
 		lblConfirmPassword.setFont(new Font("Product Sans", Font.BOLD, 15));
 		lblConfirmPassword.setBounds(480, 277, 129, 23);
 		contentPane.add(lblConfirmPassword);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(480, 311, 311, 38);
+		contentPane.add(passwordField);
 		
 		setResizable(false);
 	}

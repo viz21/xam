@@ -16,6 +16,7 @@ import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 public class ExamSelectionWindowStudent extends JFrame {
 

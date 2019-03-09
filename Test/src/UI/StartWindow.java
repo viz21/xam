@@ -23,12 +23,13 @@ import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JPasswordField;
 
 public class StartWindow extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtUID;
-	private JTextField txtPW;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -94,11 +95,6 @@ public class StartWindow extends JFrame {
 		lblUserId.setBounds(480, 192, 76, 23);
 		contentPane.add(lblUserId);
 		
-		txtPW = new JTextField();
-		txtPW.setColumns(10);
-		txtPW.setBounds(480, 313, 311, 36);
-		contentPane.add(txtPW);
-		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(480, 347, 311, 2);
 		contentPane.add(separator_1);
@@ -144,6 +140,10 @@ public class StartWindow extends JFrame {
 		ComboUser.setModel(new DefaultComboBoxModel(new String[] {"Student", "Teacher", "Admin"}));
 		ComboUser.setBounds(529, 141, 133, 22);
 		contentPane.add(ComboUser);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(480, 311, 311, 38);
+		contentPane.add(passwordField);
 		
 		setResizable(false);
 	}
