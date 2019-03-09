@@ -100,5 +100,7 @@ public class StudentModuleSelection extends JFrame {
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(181, 98, 709, 2);
 		contentPane.add(separator_1);
+		
+		setResizable(false);
 	}
 }
