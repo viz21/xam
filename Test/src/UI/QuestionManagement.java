@@ -50,7 +50,7 @@ public class QuestionManagement extends JFrame {
 		
 		JLabel label = new JLabel("IT2030 - Object Oriented Programming");
 		label.setHorizontalAlignment(SwingConstants.LEFT);
-		label.setFont(new Font("Product Sans", Font.PLAIN, 25));
+		label.setFont(new Font("Product Sans", Font.PLAIN, 25)); 
 		label.setBounds(12, 13, 890, 31);
 		contentPane.add(label);
 		
