@@ -73,6 +73,8 @@ public class StartWindow extends JFrame {
 		JButton btnSignIn = new JButton("Sign In");
 		btnSignIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new StudentModuleSelection().setVisible(true);
+				StartWindow.this.dispose();
 			}
 		});
 		btnSignIn.setFont(new Font("Product Sans", Font.BOLD, 20));

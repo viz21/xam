@@ -15,6 +15,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class StudentModuleSelection extends JFrame {
 
@@ -82,6 +84,12 @@ public class StudentModuleSelection extends JFrame {
 		table.setBackground(Color.LIGHT_GRAY);
 		
 		JButton btnNext = new JButton("Next");
+		btnNext.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new ExamSelectionWindowStudent().setVisible(true);
+				StudentModuleSelection.this.dispose();
+			}
+		});
 		btnNext.setFont(new Font("Product Sans", Font.BOLD, 20));
 		btnNext.setForeground(Color.WHITE);
 		btnNext.setBackground(new Color(51, 153, 51));

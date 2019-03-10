@@ -17,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ExamSelectionWindowStudent extends JFrame {
 
@@ -95,6 +97,12 @@ public class ExamSelectionWindowStudent extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JButton btnEnroll = new JButton("Start");
+		btnEnroll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new Exam_Window().setVisible(true);
+				ExamSelectionWindowStudent.this.dispose();
+			}
+		});
 		btnEnroll.setForeground(Color.WHITE);
 		btnEnroll.setFont(new Font("Product Sans", Font.BOLD, 20));
 		btnEnroll.setBackground(new Color(51, 153, 51));

@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import java.text.*;
 
-public class Exam_Window {
+public class Exam_Window extends JFrame{
 
 	private JFrame frame;
 
@@ -280,5 +280,7 @@ public class Exam_Window {
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel_7.setBounds(850, 37, 139, 23);
 		frame.getContentPane().add(lblNewLabel_7);
+		
+		setResizable(false);
 	}
 }
