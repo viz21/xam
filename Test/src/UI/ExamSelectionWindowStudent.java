@@ -78,16 +78,17 @@ public class ExamSelectionWindowStudent extends JFrame {
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"Online Exam 1"},
-				{"Online Exam 2"},
-				{"OOP - Mid Semester Exam (Online)"},
-				{"Online Exam 3"},
-				{"Online Exam 4"},
+				{"Online Exam 1", "Complete"},
+				{"Online Exam 2", "Complete"},
+				{"OOP - Mid Semester Exam (Online)", "Not Complete"},
+				{"Online Exam 3", "Not Complete"},
+				{"Online Exam 4", "Not Complete"},
 			},
 			new String[] {
-				"Assignment Title"
+				"Assignment Title", "Status"
 			}
 		));
+		table.getColumnModel().getColumn(0).setPreferredWidth(650);
 		table.setRowHeight(40);
 		table.setFont(new Font("Product Sans", Font.PLAIN, 20));
 		table.setBackground(Color.LIGHT_GRAY);
