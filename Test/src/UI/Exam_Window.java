@@ -70,7 +70,7 @@ public class Exam_Window extends JFrame{
 		
 		JLabel lblNewLabel_1 = new JLabel("Select One");
 		lblNewLabel_1.setBounds(236, 227, 118, 25);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18)); 
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JPanel panel = new JPanel();
