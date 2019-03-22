@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.UIManager;
 import javax.swing.ImageIcon;
 
-public class ExamSummary {
+public class ExamSummary extends JFrame{
 
 	private JFrame frame;
 

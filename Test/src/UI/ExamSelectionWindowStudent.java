@@ -99,7 +99,7 @@ public class ExamSelectionWindowStudent extends JFrame {
 		JButton btnEnroll = new JButton("Start");
 		btnEnroll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Exam_Window().setVisible(true);
+				new ExamSummary().setVisible(true);
 				ExamSelectionWindowStudent.this.dispose();
 			}
 		});
