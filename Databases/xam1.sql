@@ -22,7 +22,7 @@ create table Teacher(
 
 create table Subject(
     subjectID varchar(6), -- IT2020
-    teacherID varchar(10)
+    teacherID varchar(10) -- TE17035298
     subjectName varchar(40), -- Object Oriented Programming - Java
     credit float, -- 4.0
     constraint pk_subject primary key (subjectID),
