@@ -22,9 +22,11 @@ create table Teacher(
 
 create table Subject(
     subjectID varchar(6), -- IT2020
+    teacherID varchar(10)
     subjectName varchar(40), -- Object Oriented Programming - Java
     credit float, -- 4.0
-    constraint pk_subject primary key (subjectID)
+    constraint pk_subject primary key (subjectID),
+    constraint fk_tidS foreign key (teacherID) references Teacher(teacherID)
 );
 
 create table Question(
