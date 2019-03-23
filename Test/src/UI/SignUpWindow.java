@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.JSeparator;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -114,7 +115,12 @@ public class SignUpWindow extends JFrame {
 		btnToNewAccountWindow.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnToNewAccountWindow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new StartWindow().setVisible(true);
+				try {
+					new StartWindow().setVisible(true);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				SignUpWindow.this.dispose();
 			}
 		});

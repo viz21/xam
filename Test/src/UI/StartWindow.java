@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.sun.security.ntlm.Client;
+
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
@@ -18,12 +20,15 @@ import javax.swing.JTextField;
 import javax.swing.JSeparator;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPasswordField;
+
+import Connectivity.*;
 
 public class StartWindow extends JFrame {
 
@@ -49,8 +54,9 @@ public class StartWindow extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws RemoteException 
 	 */
-	public StartWindow() {
+	public StartWindow() throws RemoteException {
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 850, 500);
@@ -126,7 +132,10 @@ public class StartWindow extends JFrame {
 		
 		contentPane.add(btnToNewAccountWindow);
 		
-		JLabel lblWelcomeToXam = new JLabel("Welcome to X-AM!");
+		//Create new Client
+		ClientX clientx = new ClientX();
+		
+		JLabel lblWelcomeToXam = new JLabel(clientx.welcomeBanner());
 		lblWelcomeToXam.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWelcomeToXam.setFont(new Font("Product Sans", Font.BOLD, 30));
 		lblWelcomeToXam.setBounds(480, 33, 311, 52);
