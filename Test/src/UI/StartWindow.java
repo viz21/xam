@@ -19,8 +19,11 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -35,6 +38,7 @@ public class StartWindow extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtUID;
 	private JPasswordField passwordField;
+	ClientX clientx = new ClientX();
 
 	/**
 	 * Launch the application.
@@ -77,12 +81,6 @@ public class StartWindow extends JFrame {
 		panel.add(label);
 		
 		JButton btnSignIn = new JButton("Sign In");
-		btnSignIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new StudentModuleSelection().setVisible(true);
-				StartWindow.this.dispose();
-			}
-		});
 		btnSignIn.setFont(new Font("Product Sans", Font.BOLD, 20));
 		btnSignIn.setForeground(Color.WHITE);
 		btnSignIn.setBackground(new Color(51, 153, 51));
@@ -132,8 +130,11 @@ public class StartWindow extends JFrame {
 		
 		contentPane.add(btnToNewAccountWindow);
 		
-		//Create new Client
-		ClientX clientx = new ClientX();
+		/*Create new Client
+		 * here
+		 * below*/
+		
+		
 		
 		JLabel lblWelcomeToXam = new JLabel(clientx.welcomeBanner());
 		lblWelcomeToXam.setHorizontalAlignment(SwingConstants.CENTER);
@@ -155,6 +156,34 @@ public class StartWindow extends JFrame {
 		passwordField = new JPasswordField();
 		passwordField.setBounds(480, 311, 311, 38);
 		contentPane.add(passwordField);
+		
+
+		btnSignIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String type = ComboUser.getSelectedItem().toString();
+				String uid = txtUID.getText();
+				String password = new String(passwordField.getPassword());
+				
+				try {
+
+					String ID = clientx.signIn(type, uid, password);
+					if (!ID.equals("Error")) {
+						new StudentModuleSelection().setVisible(true);
+						StartWindow.this.dispose();
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Invalid Login", "Error", JOptionPane.WARNING_MESSAGE);
+					}
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		
 		setResizable(false);
 	}
