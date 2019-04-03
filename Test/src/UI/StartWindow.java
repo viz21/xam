@@ -157,8 +157,10 @@ public class StartWindow extends JFrame {
 		passwordField.setBounds(480, 311, 311, 38);
 		contentPane.add(passwordField);
 		
-
+		
 		btnSignIn.addActionListener(new ActionListener() {
+			/*The button click triggers the method signIn in ClientX
+			 * which triggers the method signIn in the stub object, ServerConnection*/
 			public void actionPerformed(ActionEvent e) {
 				
 				String type = ComboUser.getSelectedItem().toString();
@@ -169,7 +171,7 @@ public class StartWindow extends JFrame {
 
 					String ID = clientx.signIn(type, uid, password);
 					if (!ID.equals("Error")) {
-						new StudentModuleSelection().setVisible(true);
+						new ModuleSelection(uid, clientx).setVisible(true);
 						StartWindow.this.dispose();
 					}
 					else {

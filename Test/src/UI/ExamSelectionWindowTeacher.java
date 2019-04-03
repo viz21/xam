@@ -7,7 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.GraphicsConfiguration;
+
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import javax.swing.JScrollPane;
@@ -21,16 +25,17 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.awt.event.ActionEvent;
 
-public class ExamSelectionWindowStudent extends JFrame {
+public class ExamSelectionWindowTeacher extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private JTextField textField;
 	String uid = null;
 	ClientX temp = null;
 	String selectedSubjectID = null;
+	String selectedExamID = null;
 
 	/**
 	 * Launch the application.
@@ -42,7 +47,7 @@ public class ExamSelectionWindowStudent extends JFrame {
 					String ID = null;
 					String selectedSubjectID = null;
 					ClientX clientX = null;
-					ExamSelectionWindowStudent frame = new ExamSelectionWindowStudent(ID, clientX, selectedSubjectID);
+					ExamSelectionWindowTeacher frame = new ExamSelectionWindowTeacher(ID, clientX, selectedSubjectID);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,7 +59,7 @@ public class ExamSelectionWindowStudent extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ExamSelectionWindowStudent(String ID, ClientX clientX, String selectedSubjectID) {
+	public ExamSelectionWindowTeacher(String ID, ClientX clientX, String selectedSubjectID) {
 		
 		this.uid = ID;
 		this.temp = clientX;
@@ -68,7 +73,7 @@ public class ExamSelectionWindowStudent extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblItObject = new JLabel("IT2030 - Object Oriented Programming");
+		JLabel lblItObject = new JLabel(selectedSubjectID);
 		lblItObject.setBounds(12, 13, 904, 31);
 		lblItObject.setHorizontalAlignment(SwingConstants.LEFT);
 		lblItObject.setFont(new Font("Product Sans", Font.PLAIN, 25));
@@ -94,27 +99,37 @@ public class ExamSelectionWindowStudent extends JFrame {
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"Online Exam 1", "Complete"},
-				{"Online Exam 2", "Complete"},
-				{"OOP - Mid Semester Exam (Online)", "Not Complete"},
-				{"Online Exam 3", "Not Complete"},
-				{"Online Exam 4", "Not Complete"},
+				{null, "Online Exam 1", "Complete"},
+				{null, "Online Exam 2", "Complete"},
+				{null, "OOP - Mid Semester Exam (Online)", "Not Complete"},
+				{null, "Online Exam 3", "Not Complete"},
+				{null, "Online Exam 4", "Not Complete"},
 			},
 			new String[] {
-				"Assignment Title", "Status"
+				"Assignment ID", "Assignment Title", "Status"
 			}
 		));
-		table.getColumnModel().getColumn(0).setPreferredWidth(650);
+		table.getColumnModel().getColumn(1).setPreferredWidth(500);
 		table.setRowHeight(40);
 		table.setFont(new Font("Product Sans", Font.PLAIN, 20));
 		table.setBackground(Color.LIGHT_GRAY);
 		scrollPane.setViewportView(table);
 		
-		JButton btnEnroll = new JButton("Start");
+		this.modtable(table);
+		
+		JButton btnEnroll = new JButton("View");
 		btnEnroll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Exam_Window().setVisible(true);
-				ExamSelectionWindowStudent.this.dispose();
+				selectedExamID = table.getModel().getValueAt(table.getSelectedRow(), 0).toString(); //get selected examID from table
+				if(selectedSubjectID.equals(null)) {
+					JOptionPane.showMessageDialog(null, "Please select a module first!", "Error", JOptionPane.WARNING_MESSAGE);
+				}
+				else {
+					new QuestionManagement(uid, temp, selectedSubjectID, selectedExamID).setVisible(true);
+					ExamSelectionWindowTeacher.this.dispose();
+				}
+				/*new Exam_Window().setVisible(true);
+				ExamSelectionWindowTeacher.this.dispose();*/
 			}
 		});
 		btnEnroll.setForeground(Color.WHITE);
@@ -123,23 +138,29 @@ public class ExamSelectionWindowStudent extends JFrame {
 		btnEnroll.setBounds(752, 449, 150, 35);
 		contentPane.add(btnEnroll);
 		
-		textField = new JTextField();
-		textField.setBounds(565, 449, 175, 35);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("Enrollment key");
-		lblNewLabel.setFont(new Font("Product Sans", Font.PLAIN, 20));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel.setBounds(378, 449, 175, 35);
-		contentPane.add(lblNewLabel);
-		
 		JButton btnBack = new JButton("Previous");
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setFont(new Font("Product Sans", Font.BOLD, 20));
 		btnBack.setBackground(new Color(51, 153, 51));
 		btnBack.setBounds(12, 449, 150, 35);
 		contentPane.add(btnBack);
+		
 		setResizable(false);
 	}
+	
+	private void modtable(JTable table1) {
+		DefaultTableModel model = (DefaultTableModel) table1.getModel();
+		model.setRowCount(0);
+		try {
+			String[][] results = new String[10][2];
+			results = temp.enrolledExamsTeacher(selectedSubjectID);
+			int j = 0;
+			for(int i = 0; i < 5; i++) {
+				model.addRow(new Object[] {results[i][j], results[i][j + 1], results[i][j + 2]});
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

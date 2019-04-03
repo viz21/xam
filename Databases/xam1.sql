@@ -29,22 +29,39 @@ create table Subject(
     constraint fk_tidS foreign key (teacherID) references Teacher(teacherID)
 );
 
+create table Exam(
+    examID varchar(10), -- IT2020MID2
+    subjectID varchar(10), -- IT2020
+    examName varchar(20), -- Mid semester exam
+    enrlmntKey varchar(10),
+    constraint pk_exam primary key (examID),
+    constraint fk_exaS foreign key (subjectID) references Subject(subjectID)
+);
+
 create table Question(
     questionID int not null AUTO_INCREMENT,
-    subjectID varchar(10), -- IT2020
+    examID varchar(10), -- IT2020
     constraint pk_question primary key (questionID),
-    constraint fk_sidQ foreign key (subjectID) references Subject(subjectID)
+    constraint fk_exQ foreign key (examID) references Exam(examID)
 );
 
 create table Answers(
     answerID int not null AUTO_INCREMENT,
     questionID varchar(10),
-    correctAnswer varchar(100), -- (Correct Answer)
-    altAnswer1 varchar(100), -- (Wrong answer 1)
-    altAnswer2 varchar(100), -- (Wrong answer 2) if there is no wrong answer 2, keep this null
-    altAnswer3 varchar(100), -- (Wrong answer 3) if there is no wrong answer 3, keep this null
+    correctAnswer varchar(200), -- (Correct Answer)
+    altAnswer1 varchar(200), -- (Wrong answer 1)
+    altAnswer2 varchar(200), -- (Wrong answer 2) if there is no wrong answer 2, keep this null
+    altAnswer3 varchar(200), -- (Wrong answer 3) if there is no wrong answer 3, keep this null
     constraint pk_answer primary key (answerID),
     constraint fk_qidA foreign key (questionID) references Question(questionID)
+);
+
+create table StudentSubjects(
+    studentID varchar(10) not null,
+    subjectID varchar(6),
+    primary key (studentID, subjectID),
+    constraint fk_studentSS foreign key (studentID) references Student(studentID),
+    constraint fk_subjectSS foreign key (subjectID) references Subject(subjectID)
 );
 
 create table test(
@@ -52,3 +69,32 @@ create table test(
     tname varchar(10),
     tvalue1 varchar(10)
 );
+
+alter table Question
+add question varchar(150);
+
+insert into Question 
+(examID, question)
+values 
+('IT2030MID1', 'What is JIT compiler?'),
+('IT2030MID1', 'A top level class can be private or protected.'),
+('IT2030MID1', 'Inheritance represents'),
+('IT2030MID1', 'Try statements can be nested.'),
+('IT2030MID1', 'Which of the following is true about private access modifier?'),
+('IT2030MID1', 'What is inheritance?'),
+('IT2030MID1', 'What is the default value of char variable?');
+
+-- answerID was set to 'auto increment' before below execution
+
+insert into Answers
+(questionID, correctAnswer, altAnswer1, altAnswer2, altAnswer3)
+values
+(1, 'JIT improves the runtime performance of computer programs based on bytecode.', 'JIT is an application development framework.', 'JIT is an implementation of the Java Virtual Machine which executes Java programs.', 'None of the mentioned.'),
+(2, 'False', 'True', null, null),
+(3, 'IS-A relationship.', 'HAS-A relationship.', null, null),
+(4, 'True', 'False', null, null),
+(5, 'Variables, methods and constructors which are declared private can be accessed only by the members of the same class.', 'Variables, methods and constructors which are declared private can be accessed by any class lying in same package.', 'Variables, methods and constructors which are declared private in the superclass can be accessed only by its child class.', 'None of the mentioned.'),
+(6, 'It is the process where one object acquires the properties of another.', null, null, null),
+(7, "'\u0000'", null, null, null);
+
+select q.questionID, q.question, a.correctAnswer, a.altAnswer1, a.altAnswer2, a.altAnswer3 from Question q, Answers a where examID = 'IT2030MID1' and q.questionID = a.answerID

@@ -281,6 +281,6 @@ public class Exam_Window extends JFrame{
 		lblNewLabel_7.setBounds(850, 37, 139, 23);
 		frame.getContentPane().add(lblNewLabel_7);
 		
-		setResizable(false);
+		setResizable(true);
 	}
 }

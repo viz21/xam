@@ -7,21 +7,36 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import org.omg.CORBA.PRIVATE_MEMBER;
+
+import Connectivity.ClientX;
+import Connectivity.ConnectInterface;
+import jdk.internal.dynalink.beans.StaticClass;
+
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
-public class StudentModuleSelection extends JFrame {
+public class ModuleSelection extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	ClientX temp = null;
+	String uid = null;
+	String uType = null;
+	String selectedSubjectID = null;
 
 	/**
 	 * Launch the application.
@@ -30,7 +45,9 @@ public class StudentModuleSelection extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StudentModuleSelection frame = new StudentModuleSelection();
+					String ID = null;
+					ClientX clientx = null;
+					ModuleSelection frame = new ModuleSelection(ID, clientx);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +59,9 @@ public class StudentModuleSelection extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public StudentModuleSelection() {
+	public ModuleSelection(String ID, ClientX clientx) {
+		this.uid = ID;
+		this.temp = clientx;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 920, 590);
 		contentPane = new JPanel();
@@ -51,7 +70,7 @@ public class StudentModuleSelection extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Welcome Vishwa!");
+		JLabel lblNewLabel = new JLabel("Welcome " + ID + "!");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Product Sans", Font.PLAIN, 25));
 		lblNewLabel.setBounds(270, 13, 380, 50);
@@ -65,10 +84,6 @@ public class StudentModuleSelection extends JFrame {
 		table.setFont(new Font("Product Sans", Font.PLAIN, 20));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"Object Oriented Programming", "IT2030"},
-				{"Database Management Systems", "IT2040"},
-				{"Software Engineering", "IT2020"},
-				{"Operating Systems and System Administration", "IT2060"},
 			},
 			new String[] {
 				"Module Title", "Code"
@@ -82,12 +97,26 @@ public class StudentModuleSelection extends JFrame {
 		
 		scrollPane.setViewportView(table);
 		table.setBackground(Color.LIGHT_GRAY);
+		this.modTable(table); //Inserting data to the JTable with modTable(table) method
 		
 		JButton btnNext = new JButton("Next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new ExamSelectionWindowStudent().setVisible(true);
-				StudentModuleSelection.this.dispose();
+				selectedSubjectID = table.getModel().getValueAt(table.getSelectedRow(), 1).toString(); //Get selected subjectID from table
+				if(selectedSubjectID.equals(null)) {
+					JOptionPane.showMessageDialog(null, "Please select a module first!", "Error", JOptionPane.WARNING_MESSAGE);
+				} else {
+					if(uid.charAt(0) == 'I' && uid.charAt(1) == 'T') { //If the user is a student
+						new ExamSelectionWindowStudent(uid, temp, selectedSubjectID).setVisible(true);
+						ModuleSelection.this.dispose();
+					}
+					else if (uid.charAt(0) == 'T' && uid.charAt(1) == 'E') { //if the user is a teacher
+						new ExamSelectionWindowTeacher(uid, temp, selectedSubjectID).setVisible(true);
+						ModuleSelection.this.dispose();
+					}
+				}
+				/*new ExamSelectionWindowStudent().setVisible(true);
+				ModuleSelection.this.dispose();*/
 			}
 		});
 		btnNext.setFont(new Font("Product Sans", Font.BOLD, 20));
@@ -110,5 +139,26 @@ public class StudentModuleSelection extends JFrame {
 		contentPane.add(separator_1);
 		
 		setResizable(false);
+	}
+	
+	private void modTable(JTable table1) {
+		DefaultTableModel model = (DefaultTableModel) table1.getModel();
+		model.setRowCount(0);
+		try {
+			String[][] results = new String[10][2];
+			results = temp.enrolledModules(this.uid);
+			int j = 0;
+			for(int i = 0; i < 4; i++) {
+				model.addRow(new Object[] {results[i][j], results[i][j + 1]}); //Inserting Subject name and subjectID to the table
+				
+				//For some reason results[i][i] does not return the expected value, therefore an extra variable had to be used.
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
