@@ -96,9 +96,9 @@ public class Exam_Window extends JFrame{
 		label.setBounds(84, 8, 44, 21);
 		panel_1.add(label);
 		
-		JButton button = new JButton("01");
-		button.setBounds(14, 148, 52, 23);
-		panel_1.add(button);
+		JButton button_0 = new JButton("01");
+		button_0.setBounds(14, 148, 52, 23);
+		panel_1.add(button_0);
 		
 		JButton button_1 = new JButton("02");
 		button_1.setBounds(68, 148, 52, 23);
