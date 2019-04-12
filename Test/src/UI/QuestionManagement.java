@@ -133,7 +133,7 @@ public class QuestionManagement extends JFrame {
 		table.setBackground(Color.LIGHT_GRAY);
 		this.modTable(table); //Inserting QnA to the table
 		
-		JLabel lblQuestionCount = new JLabel("Question Count: 17");
+		JLabel lblQuestionCount = new JLabel("Question Count:"); //Can get this from counting QID where it's not null
 		lblQuestionCount.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblQuestionCount.setFont(new Font("Product Sans", Font.PLAIN, 25));
 		lblQuestionCount.setBounds(703, 57, 574, 31);
@@ -205,6 +205,12 @@ public class QuestionManagement extends JFrame {
 		contentPane.add(btnDeleteQuestion);
 		
 		JButton button = new JButton("Previous");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new ExamSelectionWindowTeacher(uid, temp, selectedSubjectID).setVisible(true);
+				QuestionManagement.this.dispose();
+			}
+		});
 		button.setForeground(Color.WHITE);
 		button.setFont(new Font("Product Sans", Font.BOLD, 20));
 		button.setBackground(new Color(51, 153, 51));

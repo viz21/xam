@@ -149,7 +149,7 @@ public class StartWindow extends JFrame {
 		
 		JComboBox ComboUser = new JComboBox();
 		ComboUser.setFont(new Font("Product Sans", Font.PLAIN, 15));
-		ComboUser.setModel(new DefaultComboBoxModel(new String[] {"Student", "Teacher", "Admin"}));
+		ComboUser.setModel(new DefaultComboBoxModel(new String[] {"Teacher", "Student"}));
 		ComboUser.setBounds(529, 141, 133, 22);
 		contentPane.add(ComboUser);
 		

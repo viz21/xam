@@ -139,6 +139,12 @@ public class ExamSelectionWindowTeacher extends JFrame {
 		contentPane.add(btnEnroll);
 		
 		JButton btnBack = new JButton("Previous");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new ModuleSelection(uid, temp).setVisible(true);
+				ExamSelectionWindowTeacher.this.dispose();
+			}
+		});
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setFont(new Font("Product Sans", Font.BOLD, 20));
 		btnBack.setBackground(new Color(51, 153, 51));
