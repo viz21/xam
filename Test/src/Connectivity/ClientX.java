@@ -14,7 +14,7 @@ public class ClientX {
 		try {
 			System.out.println("Searching for Server");
 			String url = "rmi://localhost/127.0.0.1:1065/XAMServer";
-			Registry registry = LocateRegistry.getRegistry(1415);
+			Registry registry = LocateRegistry.getRegistry(1419);
 			System.out.println("Registry located");
 			this.temp = (ConnectInterface) registry.lookup(url);
 			System.out.println("Server found");

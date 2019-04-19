@@ -41,6 +41,7 @@ public class ExamWindow1 extends JFrame{
 	static JRadioButton rbtnA4 = null;
 	static JTextArea textArea = null;
 	static JLabel lblQID = null;
+	static JLabel label_Qnum = null;
 
 
 	/**
@@ -159,10 +160,12 @@ public class ExamWindow1 extends JFrame{
 		label.setBounds(8, 6, 88, 22);
 		panel_1.add(label);
 		
-		JLabel label_1 = new JLabel("05");
-		label_1.setFont(new Font("Tahoma", Font.BOLD, 23));
-		label_1.setBounds(84, 8, 44, 21);
-		panel_1.add(label_1);
+		JLabel label_Qnum = new JLabel("0");
+		label_Qnum.setFont(new Font("Tahoma", Font.BOLD, 23));
+		label_Qnum.setBounds(82, 7, 44, 21);
+		panel_1.add(label_Qnum);
+		
+		ExamWindow1.label_Qnum = label_Qnum;
 		
 		//Initial question at the start of the window. Let's set it as 1st question
 		assignQs(1);
@@ -343,7 +346,18 @@ public class ExamWindow1 extends JFrame{
 		btnSubmit.setBounds(34, 431, 126, 35);
 		panel_1.add(btnSubmit);
 		
+		
 		JButton btnPrevious = new JButton("Previous");
+		btnPrevious.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (ExamWindow1.label_Qnum.getText().equals("1")) {
+					//Do nothing
+				}
+				else {
+					assignQs(Integer.parseInt(ExamWindow1.label_Qnum.getText()) - 1);
+				}
+			}
+		});
 		btnPrevious.setForeground(Color.WHITE);
 		btnPrevious.setFont(new Font("Product Sans", Font.BOLD, 20));
 		btnPrevious.setBackground(new Color(51, 153, 51));
@@ -351,6 +365,11 @@ public class ExamWindow1 extends JFrame{
 		contentPane.add(btnPrevious);
 		
 		JButton btnNext = new JButton("Next");
+		btnNext.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(Integer.parseInt(ExamWindow1.label_Qnum.getText()) + 1);
+			}
+		});
 		btnNext.setForeground(Color.WHITE);
 		btnNext.setFont(new Font("Product Sans", Font.BOLD, 20));
 		btnNext.setBackground(new Color(51, 153, 51));
@@ -368,6 +387,8 @@ public class ExamWindow1 extends JFrame{
 	}
 	
 	private void assignQs(int btnNumber) {
+		
+		ExamWindow1.label_Qnum.setText(Integer.toString(btnNumber));
 		
 		String qID = QNAs[btnNumber - 1][0];
 		String question = QNAs[btnNumber - 1][1];

@@ -98,3 +98,31 @@ values
 (7, "'\u0000'", null, null, null);
 
 select q.questionID, q.question, a.correctAnswer, a.altAnswer1, a.altAnswer2, a.altAnswer3 from Question q, Answers a where examID = 'IT2030MID1' and q.questionID = a.answerID
+
+select subjectName from subject where subjectID = ''
+
+select examName from exam where examID = ''
+
+-- 2 new tables
+
+create table Results(
+    resultID int not null auto increment,
+    examID varchar(10),
+    studentID varchar(10),
+    result int, -- marks
+    examstatus varchar(10), -- pass or failed
+    constraint pkResults primary key (resultID),
+    constraint examRe foreign key (examID) references Exam(examID),
+    constraint studentRe foreign key (studentID) references Student(studentID)
+);
+
+create table GivenAnswers(
+    studentID varchar(10),
+    examID varchar(10),
+    questionID int,
+    answer varchar(200),
+    constraint pkgivenAnswers primary key (studentID, examID, questionID),
+    constraint studentidGA foreign key (studentID) references Student(studentID),
+    constraint examidGA foreign key (examID) references Exam(examID),
+    constraint qidGA foreign key (questionID) references Question(questionID)
+);

@@ -33,6 +33,8 @@ public class QuestionManagement extends JFrame {
 	ClientX temp = null;
 	String selectedSubjectID = null;
 	String selectedExamID = null;
+	static JLabel lblQuestionCount = null;
+	int numberOfQs = 0;
 
 	/**
 	 * Launch the application.
@@ -92,6 +94,14 @@ public class QuestionManagement extends JFrame {
 		lblOopMid.setBounds(12, 57, 657, 31);
 		contentPane.add(lblOopMid);
 		
+		JLabel lblQuestionCount = new JLabel("Question Count: "); //Can get this from counting QID where it's not null
+		lblQuestionCount.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblQuestionCount.setFont(new Font("Product Sans", Font.PLAIN, 25));
+		lblQuestionCount.setBounds(703, 57, 574, 31);
+		contentPane.add(lblQuestionCount);
+		
+		this.lblQuestionCount = lblQuestionCount;
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(12, 101, 1265, 503);
 		contentPane.add(scrollPane);
@@ -133,16 +143,15 @@ public class QuestionManagement extends JFrame {
 		table.setBackground(Color.LIGHT_GRAY);
 		this.modTable(table); //Inserting QnA to the table
 		
-		JLabel lblQuestionCount = new JLabel("Question Count:"); //Can get this from counting QID where it's not null
-		lblQuestionCount.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblQuestionCount.setFont(new Font("Product Sans", Font.PLAIN, 25));
-		lblQuestionCount.setBounds(703, 57, 574, 31);
-		contentPane.add(lblQuestionCount);
-		
 		JButton btnNewQuestion = new JButton("New Question");
 		btnNewQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) { //Redirects to add new question window
-				new addNewQ(temp, selectedExamID).setVisible(true);
+				if (numberOfQs == 30) {
+					JOptionPane.showMessageDialog(null, "Cannot add anymore questions", "Error", JOptionPane.WARNING_MESSAGE);
+				}
+				else {
+					new addNewQ(temp, selectedExamID).setVisible(true);
+				}
 			}
 		});
 		btnNewQuestion.setForeground(Color.WHITE);
@@ -237,9 +246,16 @@ public class QuestionManagement extends JFrame {
 		try {
 			String[][] results = new String[30][6];
 			results = temp.viewQsNAns(selectedExamID);
+			numberOfQs = 0; // 
 			for(int i = 0; i < 30; i++) {
 				model.addRow(new Object[] {results[i][0], results[i][1], results[i][2], results[i][3], results[i][4], results[i][5]});
+				if(results[i][0] != null){ // for 'Question Count:' label
+					numberOfQs++;
+				}
 			}
+			
+			QuestionManagement.lblQuestionCount.setText("Question Count: " + Integer.toString(numberOfQs)); //Can get this from counting QID where it's not null
+			
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
