@@ -24,6 +24,8 @@ import Connectivity.ClientX;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.JSeparator;
 
 public class QuestionManagement extends JFrame {
 
@@ -33,8 +35,10 @@ public class QuestionManagement extends JFrame {
 	ClientX temp = null;
 	String selectedSubjectID = null;
 	String selectedExamID = null;
+	String Enrollments = null;
 	static JLabel lblQuestionCount = null;
 	int numberOfQs = 0;
+	private JTextField txtEnrlmnt;
 
 	/**
 	 * Launch the application.
@@ -66,7 +70,7 @@ public class QuestionManagement extends JFrame {
 		this.selectedSubjectID = selectedSubjectID;
 		this.selectedExamID = selectedExamID; 
 		
-		String[][] result = new String[1][2];
+		String[][] result = new String[1][3];
 		try {
 			result = temp.examMgmntFewDetails(this.selectedSubjectID, this.selectedExamID);
 		} catch (RemoteException e) {
@@ -237,6 +241,39 @@ public class QuestionManagement extends JFrame {
 		btnRefresh.setBackground(new Color(51, 153, 51));
 		btnRefresh.setBounds(12, 617, 150, 35);
 		contentPane.add(btnRefresh);
+		
+		txtEnrlmnt = new JTextField();
+		txtEnrlmnt.setColumns(10);
+		txtEnrlmnt.setBounds(779, 665, 236, 35);
+		contentPane.add(txtEnrlmnt);
+		
+		txtEnrlmnt.setText(result[0][2]);
+		
+		JButton btnEnrollmentKey = new JButton("Change Enrollment Key");
+		btnEnrollmentKey.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					if (txtEnrlmnt.getText().length() > 10) {
+						JOptionPane.showMessageDialog(null, "Enrollment key cannot be more than 10 characters!", "Error", JOptionPane.WARNING_MESSAGE);
+					} else {
+						temp.changeEnrlmntKey(selectedExamID, txtEnrlmnt.getText());
+					}
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		btnEnrollmentKey.setForeground(Color.WHITE);
+		btnEnrollmentKey.setFont(new Font("Product Sans", Font.BOLD, 20));
+		btnEnrollmentKey.setBackground(new Color(51, 153, 51));
+		btnEnrollmentKey.setBounds(509, 665, 258, 35);
+		contentPane.add(btnEnrollmentKey);
+		
+		JSeparator separator = new JSeparator();
+		separator.setOrientation(SwingConstants.VERTICAL);
+		separator.setBounds(1027, 665, 2, 35);
+		contentPane.add(separator);
 		setResizable(false);
 	}
 	

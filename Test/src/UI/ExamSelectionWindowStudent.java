@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
@@ -21,13 +23,14 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.awt.event.ActionEvent;
 
 public class ExamSelectionWindowStudent extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private JTextField textField;
+	private JTextField textEnKey;
 	String uid = null;
 	ClientX temp = null;
 	String selectedSubjectID = null;
@@ -94,27 +97,37 @@ public class ExamSelectionWindowStudent extends JFrame {
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"Online Exam 1", "Complete"},
-				{"Online Exam 2", "Complete"},
-				{"OOP - Mid Semester Exam (Online)", "Not Complete"},
-				{"Online Exam 3", "Not Complete"},
-				{"Online Exam 4", "Not Complete"},
+				{null, "Online Exam 1", "Complete"},
+				{null, "Online Exam 2", "Complete"},
+				{null, "OOP - Mid Semester Exam (Online)", "Not Complete"},
+				{null, "Online Exam 3", "Not Complete"},
+				{null, "Online Exam 4", "Not Complete"},
 			},
 			new String[] {
-				"Assignment Title", "Status"
+				"Assignment ID", "Assignment Title", "Status"
 			}
 		));
-		table.getColumnModel().getColumn(0).setPreferredWidth(650);
+		table.getColumnModel().getColumn(0).setPreferredWidth(100);
+		table.getColumnModel().getColumn(1).setPreferredWidth(580);
+		table.getColumnModel().getColumn(2).setPreferredWidth(110);
 		table.setRowHeight(40);
 		table.setFont(new Font("Product Sans", Font.PLAIN, 20));
 		table.setBackground(Color.LIGHT_GRAY);
 		scrollPane.setViewportView(table);
 		
+		this.modTable(table);
+		
 		JButton btnEnroll = new JButton("Start");
 		btnEnroll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Exam_Window().setVisible(true);
-				ExamSelectionWindowStudent.this.dispose();
+				if (textEnKey.getText() == null) {
+					JOptionPane.showMessageDialog(null, "Ya think it's empty but it's not!", "Error", JOptionPane.WARNING_MESSAGE);
+					/*if (temp.checkEnrlmntKey(examID, enKey)) {
+						
+					}*/
+				} else {
+					JOptionPane.showMessageDialog(null, "Please enter the Enrollment Key!", "Error", JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		});
 		btnEnroll.setForeground(Color.WHITE);
@@ -123,10 +136,10 @@ public class ExamSelectionWindowStudent extends JFrame {
 		btnEnroll.setBounds(752, 449, 150, 35);
 		contentPane.add(btnEnroll);
 		
-		textField = new JTextField();
-		textField.setBounds(565, 449, 175, 35);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textEnKey = new JTextField();
+		textEnKey.setBounds(565, 449, 175, 35);
+		contentPane.add(textEnKey);
+		textEnKey.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Enrollment key");
 		lblNewLabel.setFont(new Font("Product Sans", Font.PLAIN, 20));
@@ -141,5 +154,20 @@ public class ExamSelectionWindowStudent extends JFrame {
 		btnBack.setBounds(12, 449, 150, 35);
 		contentPane.add(btnBack);
 		setResizable(false);
+	}
+	
+	private void modTable(JTable table1) {
+		DefaultTableModel model = (DefaultTableModel) table1.getModel();
+		model.setRowCount(0);
+		try {
+			String[][] results = new String[10][2];
+			results = temp.enrolledExamsTeacher(selectedSubjectID);
+			int j = 0;
+			for(int i = 0; i < 5; i++) {
+				model.addRow(new Object[] {results[i][j], results[i][j + 1], results[i][j + 2]});
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 }

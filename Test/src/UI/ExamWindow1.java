@@ -42,7 +42,9 @@ public class ExamWindow1 extends JFrame{
 	static JTextArea textArea = null;
 	static JLabel lblQID = null;
 	static JLabel label_Qnum = null;
-
+	static int btnNumberMain = 0; // cuz lblQID and this is not the same
+	
+	static JButton[] QButtons = new JButton[31];
 
 	/**
 	 * Launch the application.
@@ -72,6 +74,8 @@ public class ExamWindow1 extends JFrame{
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+		
+		//QButtons = null;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1224, 696);
@@ -108,7 +112,10 @@ public class ExamWindow1 extends JFrame{
 			public void mouseExited(MouseEvent arg0) {
 				if (rbtnA1 == null && rbtnA2 == null && rbtnA3 == null && rbtnA4 == null && textArea == null) {
 					//Do nothing
-				} else {
+				} 
+				else {
+					Boolean check = false;
+					
 					if (textArea != null && textArea.getText() != "") {
 						System.out.println(textArea.getText());
 						selectedAnswer[Integer.parseInt(lblQID.getText())][0] = textArea.getText();
@@ -116,6 +123,7 @@ public class ExamWindow1 extends JFrame{
 						selectedAnswer[Integer.parseInt(lblQID.getText())][2] = null;
 						selectedAnswer[Integer.parseInt(lblQID.getText())][3] = null;
 						selectedAnswer[Integer.parseInt(lblQID.getText())][4] = null;
+						check = true;
 						
 					} else if (rbtnA1 != null && rbtnA1.isSelected()) {
 						selectedAnswer[Integer.parseInt(lblQID.getText())][1] = "1";
@@ -123,25 +131,34 @@ public class ExamWindow1 extends JFrame{
 						selectedAnswer[Integer.parseInt(lblQID.getText())][3] = null;
 						selectedAnswer[Integer.parseInt(lblQID.getText())][4] = null;
 						//System.out.println(selectedAnswer[Integer.parseInt(lblQID.getText())][1]);
+						check = true;
 						
 					} else if (rbtnA2 != null && rbtnA2.isSelected()) {
 						selectedAnswer[Integer.parseInt(lblQID.getText())][1] = null;
 						selectedAnswer[Integer.parseInt(lblQID.getText())][2] = "2";
 						selectedAnswer[Integer.parseInt(lblQID.getText())][3] = null;
 						selectedAnswer[Integer.parseInt(lblQID.getText())][4] = null;
+						check = true;
 						
 					} else if (rbtnA3 != null && rbtnA3.isSelected()) {
 						selectedAnswer[Integer.parseInt(lblQID.getText())][1] = null;
 						selectedAnswer[Integer.parseInt(lblQID.getText())][2] = null;
 						selectedAnswer[Integer.parseInt(lblQID.getText())][3] = "3";
 						selectedAnswer[Integer.parseInt(lblQID.getText())][4] = null;
+						check = true;
 						
 					} else if (rbtnA4 != null && rbtnA4.isSelected()) {
 						selectedAnswer[Integer.parseInt(lblQID.getText())][1] = null;
 						selectedAnswer[Integer.parseInt(lblQID.getText())][2] = null;
 						selectedAnswer[Integer.parseInt(lblQID.getText())][3] = null;
 						selectedAnswer[Integer.parseInt(lblQID.getText())][4] = "4";
+						check = true;
 						
+					}
+					
+					if (check) {
+						QButtons[btnNumberMain].setForeground(Color.WHITE);
+						QButtons[btnNumberMain].setBackground(new Color(51, 153, 51));
 					}
 				}
 			}
@@ -178,6 +195,7 @@ public class ExamWindow1 extends JFrame{
 		});
 		button_1.setBounds(14, 148, 52, 23);
 		panel_1.add(button_1);
+		ExamWindow1.QButtons[1] = button_1;
 		
 		JButton button_2 = new JButton("02");
 		button_2.addActionListener(new ActionListener() {
@@ -187,6 +205,7 @@ public class ExamWindow1 extends JFrame{
 		});
 		button_2.setBounds(68, 148, 52, 23);
 		panel_1.add(button_2);
+		QButtons[2] = button_2;
 		
 		JButton button_3 = new JButton("03");
 		button_3.addActionListener(new ActionListener() {
@@ -196,6 +215,7 @@ public class ExamWindow1 extends JFrame{
 		});
 		button_3.setBounds(122, 148, 52, 23);
 		panel_1.add(button_3);
+		QButtons[3] = button_3;
 		
 		JButton button_4 = new JButton("04");
 		button_4.addActionListener(new ActionListener() {
@@ -205,6 +225,7 @@ public class ExamWindow1 extends JFrame{
 		});
 		button_4.setBounds(14, 172, 52, 23);
 		panel_1.add(button_4);
+		QButtons[4] = button_4;
 		
 		JButton button_5 = new JButton("05");
 		button_5.addActionListener(new ActionListener() {
@@ -214,6 +235,7 @@ public class ExamWindow1 extends JFrame{
 		});
 		button_5.setBounds(68, 172, 52, 23);
 		panel_1.add(button_5);
+		QButtons[5] = button_5;
 		
 		JButton button_6 = new JButton("06");
 		button_6.addActionListener(new ActionListener() {
@@ -223,18 +245,37 @@ public class ExamWindow1 extends JFrame{
 		});
 		button_6.setBounds(122, 172, 52, 23);
 		panel_1.add(button_6);
+		QButtons[6] = button_6;
 		
 		JButton button_10 = new JButton("10");
+		button_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(10);
+			}
+		});
 		button_10.setBounds(14, 218, 52, 23);
 		panel_1.add(button_10);
+		QButtons[10] = button_10;
 		
 		JButton button_11 = new JButton("11");
+		button_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(11);
+			}
+		});
 		button_11.setBounds(68, 218, 52, 23);
 		panel_1.add(button_11);
+		QButtons[11] = button_11;
 		
 		JButton button_12 = new JButton("12");
+		button_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(12);
+			}
+		});
 		button_12.setBounds(122, 218, 52, 23);
 		panel_1.add(button_12);
+		QButtons[12] = button_12;
 		
 		JButton button_7 = new JButton("07");
 		button_7.addActionListener(new ActionListener() {
@@ -244,6 +285,7 @@ public class ExamWindow1 extends JFrame{
 		});
 		button_7.setBounds(14, 194, 52, 23);
 		panel_1.add(button_7);
+		QButtons[7] = button_7;
 		
 		JButton button_8 = new JButton("08");
 		button_8.addActionListener(new ActionListener() {
@@ -253,6 +295,7 @@ public class ExamWindow1 extends JFrame{
 		});
 		button_8.setBounds(68, 194, 52, 23);
 		panel_1.add(button_8);
+		QButtons[8] = button_8;
 		
 		JButton button_9 = new JButton("09");
 		button_9.addActionListener(new ActionListener() {
@@ -262,84 +305,197 @@ public class ExamWindow1 extends JFrame{
 		});
 		button_9.setBounds(122, 194, 52, 23);
 		panel_1.add(button_9);
+		QButtons[9] = button_9;
 		
 		JButton button_13 = new JButton("13");
+		button_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(13);
+			}
+		});
 		button_13.setBounds(14, 242, 52, 23);
 		panel_1.add(button_13);
+		QButtons[13] = button_13;
 		
 		JButton button_14 = new JButton("14");
+		button_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(14);
+			}
+		});
 		button_14.setBounds(68, 242, 52, 23);
 		panel_1.add(button_14);
+		QButtons[14] = button_14;
 		
 		JButton button_15 = new JButton("15");
+		button_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(15);
+			}
+		});
 		button_15.setBounds(122, 242, 52, 23);
 		panel_1.add(button_15);
+		QButtons[15] = button_15;
 		
 		JButton button_18 = new JButton("18");
+		button_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(18);
+			}
+		});
 		button_18.setBounds(122, 266, 52, 23);
 		panel_1.add(button_18);
+		QButtons[18] = button_18;
 		
 		JButton button_17 = new JButton("17");
+		button_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(17);
+			}
+		});
 		button_17.setBounds(68, 266, 52, 23);
 		panel_1.add(button_17);
+		QButtons[17] = button_17;
 		
 		JButton button_16 = new JButton("16");
+		button_16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(16);
+			}
+		});
 		button_16.setBounds(14, 266, 52, 23);
 		panel_1.add(button_16);
+		QButtons[16] = button_16;
 		
 		JButton button_19 = new JButton("19");
+		button_19.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(19);
+			}
+		});
 		button_19.setBounds(14, 288, 52, 23);
 		panel_1.add(button_19);
+		QButtons[19] = button_19;
 		
 		JButton button_20 = new JButton("20");
+		button_20.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(20);
+			}
+		});
 		button_20.setBounds(68, 288, 52, 23);
 		panel_1.add(button_20);
+		QButtons[20] = button_20;
 		
 		JButton button_21 = new JButton("21");
+		button_21.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(21);
+			}
+		});
 		button_21.setBounds(122, 288, 52, 23);
 		panel_1.add(button_21);
+		QButtons[21] = button_21;
 		
 		JButton button_24 = new JButton("24");
+		button_24.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(24);
+			}
+		});
 		button_24.setBounds(122, 312, 52, 23);
 		panel_1.add(button_24);
+		QButtons[24] = button_24;
 		
 		JButton button_23 = new JButton("23");
+		button_23.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(23);
+			}
+		});
 		button_23.setBounds(68, 312, 52, 23);
 		panel_1.add(button_23);
+		QButtons[23] = button_23;
 		
 		JButton button_22 = new JButton("22");
+		button_22.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(22);
+			}
+		});
 		button_22.setBounds(14, 312, 52, 23);
 		panel_1.add(button_22);
+		QButtons[22] = button_22;
 		
 		JButton button_30 = new JButton("30");
+		button_30.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(30);
+			}
+		});
 		button_30.setBounds(122, 359, 52, 23);
 		panel_1.add(button_30);
+		QButtons[30] = button_30;
 		
 		JButton button_29 = new JButton("29");
+		button_29.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(29);
+			}
+		});
 		button_29.setBounds(68, 359, 52, 23);
 		panel_1.add(button_29);
+		QButtons[29] = button_29;
 		
 		JButton button_28 = new JButton("28");
+		button_28.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(28);
+			}
+		});
 		button_28.setBounds(14, 359, 52, 23);
 		panel_1.add(button_28);
+		QButtons[28] = button_28;
 		
 		JButton button_25 = new JButton("25");
+		button_25.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(25);
+			}
+		});
 		button_25.setBounds(14, 335, 52, 23);
 		panel_1.add(button_25);
+		QButtons[25] = button_25;
 		
 		JButton button_26 = new JButton("26");
+		button_26.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(26);
+			}
+		});
 		button_26.setBounds(68, 335, 52, 23);
 		panel_1.add(button_26);
+		QButtons[26] = button_26;
 		
 		JButton button_27 = new JButton("27");
+		button_27.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				assignQs(27);
+			}
+		});
 		button_27.setBounds(122, 335, 52, 23);
 		panel_1.add(button_27);
+		QButtons[27] = button_27;
 		
 		JButton button_flag = new JButton("Flag this Question");
 		button_flag.setBounds(14, 393, 160, 23);
 		panel_1.add(button_flag);
 		
 		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnSubmit.setForeground(Color.WHITE);
 		btnSubmit.setFont(new Font("Dialog", Font.BOLD, 20));
 		btnSubmit.setBackground(new Color(51, 153, 51));
@@ -382,6 +538,11 @@ public class ExamWindow1 extends JFrame{
 		label_2.setBounds(228, 13, 246, 40);
 		contentPane.add(label_2);
 		
+		JLabel lblNewLabel = new JLabel("*Please use the mouse to shift among questions");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
+		lblNewLabel.setBounds(228, 606, 346, 16);
+		contentPane.add(lblNewLabel);
+		
 		setResizable(false);
 		
 	}
@@ -401,6 +562,7 @@ public class ExamWindow1 extends JFrame{
 		this.QPanel.updateUI();
 		
 		ExamWindow1.lblQID.setText(qID);
+		ExamWindow1.btnNumberMain = btnNumber;
 		
 		JLabel lblQuestion = new JLabel("New label");
 		lblQuestion.setFont(new Font("Arial", Font.BOLD, 15));
@@ -466,6 +628,7 @@ public class ExamWindow1 extends JFrame{
 
 		if (selectedAnswer[Integer.parseInt(lblQID.getText())][1] != null) {
 			rbtnA1.setSelected(true);
+			
 		} else if (selectedAnswer[Integer.parseInt(lblQID.getText())][2] != null) {
 			rbtnA2.setSelected(true);
 		} else if (selectedAnswer[Integer.parseInt(lblQID.getText())][3] != null) {

@@ -110,7 +110,7 @@ public class StartWindow extends JFrame {
 		lblPassword.setBounds(480, 277, 76, 23);
 		contentPane.add(lblPassword);
 		
-		JButton btnToNewAccountWindow = new JButton("Don't have an account?");
+		JButton btnToNewAccountWindow = new JButton("Change password here");
 		btnToNewAccountWindow.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnToNewAccountWindow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
