@@ -14,7 +14,7 @@ public class ClientX {
 		try {
 			System.out.println("Searching for Server");
 			String url = "rmi://localhost/127.0.0.1:1065/XAMServer";
-			Registry registry = LocateRegistry.getRegistry(1419);
+			Registry registry = LocateRegistry.getRegistry(1400);
 			System.out.println("Registry located");
 			this.temp = (ConnectInterface) registry.lookup(url);
 			System.out.println("Server found");
@@ -60,6 +60,14 @@ public class ClientX {
 	
 	public void updateQnAns(String QID, String Q, String CA, String AA1, String AA2, String AA3) throws RemoteException {
 		temp.updateQnAns(QID, Q, CA, AA1, AA2, AA3);
+	}
+	
+	public void changeEnrlmntKey(String examID, String enKey) throws RemoteException {
+		temp.changeEnrlmntKey(examID, enKey);
+	}
+	
+	public boolean checkEnrlmntKey(String examID, String enKey) throws RemoteException {
+		return temp.checkEnrlmntKey(examID, enKey);
 	}
 	
 	/*public static void main(String[] args) throws RemoteException, SQLException {

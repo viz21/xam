@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.HeadlessException;
+
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import javax.swing.JScrollPane;
@@ -120,14 +122,28 @@ public class ExamSelectionWindowStudent extends JFrame {
 		JButton btnEnroll = new JButton("Start");
 		btnEnroll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (textEnKey.getText() == null) {
-					JOptionPane.showMessageDialog(null, "Ya think it's empty but it's not!", "Error", JOptionPane.WARNING_MESSAGE);
+				String examID = table.getModel().getValueAt(table.getSelectedRow(), 0).toString();
+				if (textEnKey.getText().length() == 0) {
+					JOptionPane.showMessageDialog(null, "Please enter an Enrollment Key", "Error", JOptionPane.WARNING_MESSAGE);
 					/*if (temp.checkEnrlmntKey(examID, enKey)) {
 						
 					}*/
-				} else {
-					JOptionPane.showMessageDialog(null, "Please enter the Enrollment Key!", "Error", JOptionPane.WARNING_MESSAGE);
-				}
+				} else
+					try {
+						if (temp.checkEnrlmntKey(table.getModel().getValueAt(table.getSelectedRow(), 0).toString(), textEnKey.getText())) {
+							new ExamWindow1(ID, clientX, table.getModel().getValueAt(table.getSelectedRow(), 0).toString()).setVisible(true);
+							ExamSelectionWindowStudent.this.dispose();
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Incorrect Enrollment Key!", "Error", JOptionPane.WARNING_MESSAGE);
+						}
+					} catch (HeadlessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 			}
 		});
 		btnEnroll.setForeground(Color.WHITE);

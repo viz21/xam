@@ -34,6 +34,10 @@ public class ExamWindow1 extends JFrame{
 	String qNum = null;
 	String selectedAnswer[][] = new String[5000][6];
 	static JPanel QPanel = null;
+
+	/*String uid = null;
+	ClientX temp = null;
+	String selectedExamID = null;*/
 	
 	static JRadioButton rbtnA1 = null; //Miight wanna remove static from these variables
 	static JRadioButton rbtnA2 = null;
@@ -53,7 +57,10 @@ public class ExamWindow1 extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ExamWindow1 frame = new ExamWindow1();
+					String ID = null;
+					String selectedExamID = null;
+					ClientX clientX = null;
+					ExamWindow1 frame = new ExamWindow1(/*ID, clientX, selectedExamID*/);
 					frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -66,7 +73,10 @@ public class ExamWindow1 extends JFrame{
 	/**
 	 * Create the frame.
 	 */
-	public ExamWindow1() {
+	public ExamWindow1(/*String ID, ClientX clientX, String selectedExamID*/) {
+		/*this.uid = ID;
+		this.temp = clientX;
+		this.selectedExamID = selectedExamID;*/ //gotta uncomment these when coming from the start
 		
 		try {
 			this.QNAs = temp.viewQsNAns("IT2030MID1"); //examID must be a parameter passed from a different window
@@ -116,49 +126,65 @@ public class ExamWindow1 extends JFrame{
 				else {
 					Boolean check = false;
 					
-					if (textArea != null && textArea.getText() != "") {
-						System.out.println(textArea.getText());
-						selectedAnswer[Integer.parseInt(lblQID.getText())][0] = textArea.getText();
-						selectedAnswer[Integer.parseInt(lblQID.getText())][1] = null;
-						selectedAnswer[Integer.parseInt(lblQID.getText())][2] = null;
-						selectedAnswer[Integer.parseInt(lblQID.getText())][3] = null;
-						selectedAnswer[Integer.parseInt(lblQID.getText())][4] = null;
-						check = true;
+					if (textArea != null) {
+						if (textArea.getText().length() > 0) {
+							System.out.println("not empty");
+							selectedAnswer[Integer.parseInt(lblQID.getText())][0] = textArea.getText();
+							selectedAnswer[Integer.parseInt(lblQID.getText())][1] = null;
+							selectedAnswer[Integer.parseInt(lblQID.getText())][2] = null;
+							selectedAnswer[Integer.parseInt(lblQID.getText())][3] = null;
+							selectedAnswer[Integer.parseInt(lblQID.getText())][4] = null;
+							check = true;
+						} else {
+							System.out.println("empty");
+							selectedAnswer[Integer.parseInt(lblQID.getText())][0] = textArea.getText();
+							selectedAnswer[Integer.parseInt(lblQID.getText())][1] = null;
+							selectedAnswer[Integer.parseInt(lblQID.getText())][2] = null;
+							selectedAnswer[Integer.parseInt(lblQID.getText())][3] = null;
+							selectedAnswer[Integer.parseInt(lblQID.getText())][4] = null;
+							//check = false;
+						}
 						
-					} else if (rbtnA1 != null && rbtnA1.isSelected()) {
-						selectedAnswer[Integer.parseInt(lblQID.getText())][1] = "1";
-						selectedAnswer[Integer.parseInt(lblQID.getText())][2] = null;
-						selectedAnswer[Integer.parseInt(lblQID.getText())][3] = null;
-						selectedAnswer[Integer.parseInt(lblQID.getText())][4] = null;
-						//System.out.println(selectedAnswer[Integer.parseInt(lblQID.getText())][1]);
-						check = true;
+					} else if (textArea == null) {
 						
-					} else if (rbtnA2 != null && rbtnA2.isSelected()) {
-						selectedAnswer[Integer.parseInt(lblQID.getText())][1] = null;
-						selectedAnswer[Integer.parseInt(lblQID.getText())][2] = "2";
-						selectedAnswer[Integer.parseInt(lblQID.getText())][3] = null;
-						selectedAnswer[Integer.parseInt(lblQID.getText())][4] = null;
-						check = true;
+						if (rbtnA1 != null && rbtnA1.isSelected()) {
+							selectedAnswer[Integer.parseInt(lblQID.getText())][1] = "1";
+							selectedAnswer[Integer.parseInt(lblQID.getText())][2] = null;
+							selectedAnswer[Integer.parseInt(lblQID.getText())][3] = null;
+							selectedAnswer[Integer.parseInt(lblQID.getText())][4] = null;
+							//System.out.println(selectedAnswer[Integer.parseInt(lblQID.getText())][1]);
+							check = true;
+						} else if (rbtnA2 != null && rbtnA2.isSelected()) {
+							selectedAnswer[Integer.parseInt(lblQID.getText())][1] = null;
+							selectedAnswer[Integer.parseInt(lblQID.getText())][2] = "2";
+							selectedAnswer[Integer.parseInt(lblQID.getText())][3] = null;
+							selectedAnswer[Integer.parseInt(lblQID.getText())][4] = null;
+							check = true;
+							
+						} else if (rbtnA3 != null && rbtnA3.isSelected()) {
+							selectedAnswer[Integer.parseInt(lblQID.getText())][1] = null;
+							selectedAnswer[Integer.parseInt(lblQID.getText())][2] = null;
+							selectedAnswer[Integer.parseInt(lblQID.getText())][3] = "3";
+							selectedAnswer[Integer.parseInt(lblQID.getText())][4] = null;
+							check = true;
+							
+						} else if (rbtnA4 != null && rbtnA4.isSelected()) {
+							selectedAnswer[Integer.parseInt(lblQID.getText())][1] = null;
+							selectedAnswer[Integer.parseInt(lblQID.getText())][2] = null;
+							selectedAnswer[Integer.parseInt(lblQID.getText())][3] = null;
+							selectedAnswer[Integer.parseInt(lblQID.getText())][4] = "4";
+							check = true;
+							
+						} 
 						
-					} else if (rbtnA3 != null && rbtnA3.isSelected()) {
-						selectedAnswer[Integer.parseInt(lblQID.getText())][1] = null;
-						selectedAnswer[Integer.parseInt(lblQID.getText())][2] = null;
-						selectedAnswer[Integer.parseInt(lblQID.getText())][3] = "3";
-						selectedAnswer[Integer.parseInt(lblQID.getText())][4] = null;
-						check = true;
-						
-					} else if (rbtnA4 != null && rbtnA4.isSelected()) {
-						selectedAnswer[Integer.parseInt(lblQID.getText())][1] = null;
-						selectedAnswer[Integer.parseInt(lblQID.getText())][2] = null;
-						selectedAnswer[Integer.parseInt(lblQID.getText())][3] = null;
-						selectedAnswer[Integer.parseInt(lblQID.getText())][4] = "4";
-						check = true;
-						
-					}
+					} 
 					
 					if (check) {
 						QButtons[btnNumberMain].setForeground(Color.WHITE);
 						QButtons[btnNumberMain].setBackground(new Color(51, 153, 51));
+					} else {
+						QButtons[btnNumberMain].setForeground(new Color(0, 0, 0));
+						QButtons[btnNumberMain].setBackground(new Color(240, 240, 240));
 					}
 				}
 			}
@@ -577,6 +603,11 @@ public class ExamWindow1 extends JFrame{
 			textArea.setFont(new Font("Arial", Font.PLAIN, 18));
 			textArea.setBounds(8, 108, 480, 150);
 			QPanel.add(textArea);
+			
+			this.rbtnA1 = null;
+			this.rbtnA2 = null;
+			this.rbtnA3 = null;
+			this.rbtnA4 = null;
 			
 		} else {
 			textArea = null;

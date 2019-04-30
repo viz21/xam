@@ -29,5 +29,8 @@ public interface ConnectInterface extends Remote{
 	void deleteQuestion(String QID) throws RemoteException;
 	
 	void updateQnAns(String QID, String Q, String CA, String AA1, String AA2, String AA3) throws RemoteException;
-
+	
+	void changeEnrlmntKey(String examID, String enKey) throws RemoteException;
+	
+	boolean checkEnrlmntKey(String examID, String enKey) throws RemoteException;
 }
