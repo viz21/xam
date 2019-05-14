@@ -31,13 +31,15 @@ public class ExamWindow1 extends JFrame{
 	private JPanel contentPane;
 	ClientX temp = new ClientX(); //This is temporary
 	String[][] QNAs = new String[30][6];
-	String qNum = null;
+	String realQNum = null;
 	String selectedAnswer[][] = new String[5000][6];
 	static JPanel QPanel = null;
 
 	/*String uid = null;
 	ClientX temp = null;
 	String selectedExamID = null;*/
+	
+	String tempID = "IT123";
 	
 	static JRadioButton rbtnA1 = null; //Miight wanna remove static from these variables
 	static JRadioButton rbtnA2 = null;
@@ -146,6 +148,8 @@ public class ExamWindow1 extends JFrame{
 						}
 						
 					} else if (textArea == null) {
+						
+						selectedAnswer[Integer.parseInt(lblQID.getText())][0] = null;
 						
 						if (rbtnA1 != null && rbtnA1.isSelected()) {
 							selectedAnswer[Integer.parseInt(lblQID.getText())][1] = "1";
@@ -583,6 +587,8 @@ public class ExamWindow1 extends JFrame{
 		String answer2 = QNAs[btnNumber - 1][3];
 		String answer3 = QNAs[btnNumber - 1][4];
 		String answer4 = QNAs[btnNumber - 1][5];
+		
+		this.realQNum = qID;
 		
 		this.QPanel.removeAll();
 		this.QPanel.updateUI();
