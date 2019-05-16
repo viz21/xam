@@ -29,15 +29,15 @@ import javax.swing.JTextArea;
 public class ExamWindow1 extends JFrame{
 
 	private JPanel contentPane;
-	ClientX temp = new ClientX(); //This is temporary
+	//ClientX temp = new ClientX(); //This is temporary
 	String[][] QNAs = new String[30][6];
-	String realQNum = null;
+	static String realQNum = null;
 	String selectedAnswer[][] = new String[5000][6];
 	static JPanel QPanel = null;
 
-	/*String uid = null;
+	String uid = null;
 	ClientX temp = null;
-	String selectedExamID = null;*/
+	String selectedExamID = null;
 	
 	String tempID = "IT123";
 	
@@ -62,7 +62,7 @@ public class ExamWindow1 extends JFrame{
 					String ID = null;
 					String selectedExamID = null;
 					ClientX clientX = null;
-					ExamWindow1 frame = new ExamWindow1(/*ID, clientX, selectedExamID*/);
+					ExamWindow1 frame = new ExamWindow1(ID, clientX, selectedExamID);
 					frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -75,10 +75,10 @@ public class ExamWindow1 extends JFrame{
 	/**
 	 * Create the frame.
 	 */
-	public ExamWindow1(/*String ID, ClientX clientX, String selectedExamID*/) {
-		/*this.uid = ID;
+	public ExamWindow1(String ID, ClientX clientX, String selectedExamID) {
+		this.uid = ID;
 		this.temp = clientX;
-		this.selectedExamID = selectedExamID;*/ //gotta uncomment these when coming from the start
+		this.selectedExamID = selectedExamID;
 		
 		try {
 			this.QNAs = temp.viewQsNAns("IT2030MID1"); //examID must be a parameter passed from a different window
@@ -128,9 +128,12 @@ public class ExamWindow1 extends JFrame{
 				else {
 					Boolean check = false;
 					
+					selectedAnswer[Integer.parseInt(lblQID.getText())][5] = realQNum;
+					System.out.println(realQNum);
+					
 					if (textArea != null) {
 						if (textArea.getText().length() > 0) {
-							System.out.println("not empty");
+							//System.out.println("not empty");
 							selectedAnswer[Integer.parseInt(lblQID.getText())][0] = textArea.getText();
 							selectedAnswer[Integer.parseInt(lblQID.getText())][1] = null;
 							selectedAnswer[Integer.parseInt(lblQID.getText())][2] = null;
@@ -138,8 +141,8 @@ public class ExamWindow1 extends JFrame{
 							selectedAnswer[Integer.parseInt(lblQID.getText())][4] = null;
 							check = true;
 						} else {
-							System.out.println("empty");
-							selectedAnswer[Integer.parseInt(lblQID.getText())][0] = textArea.getText();
+							//System.out.println("empty");
+							selectedAnswer[Integer.parseInt(lblQID.getText())][0] = null; // has been changed the value from 'textArea.getText()' to null;
 							selectedAnswer[Integer.parseInt(lblQID.getText())][1] = null;
 							selectedAnswer[Integer.parseInt(lblQID.getText())][2] = null;
 							selectedAnswer[Integer.parseInt(lblQID.getText())][3] = null;
@@ -524,6 +527,12 @@ public class ExamWindow1 extends JFrame{
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					temp.ExamSubmission(uid, selectedExamID, selectedAnswer);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		btnSubmit.setForeground(Color.WHITE);

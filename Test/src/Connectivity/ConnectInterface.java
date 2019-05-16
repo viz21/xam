@@ -33,4 +33,12 @@ public interface ConnectInterface extends Remote{
 	void changeEnrlmntKey(String examID, String enKey) throws RemoteException;
 	
 	boolean checkEnrlmntKey(String examID, String enKey) throws RemoteException;
+	
+	void ExamSubmission(String stdID, String examID, String[][] answers) throws RemoteException;
+	
+	String[][] WrittenAnswerReview(String examID) throws RemoteException;
+	
+	void WrittenAnswerReviewSubmission(String[][] results) throws RemoteException;
+	
+	String[][] finalResults(String examID) throws RemoteException;
 }

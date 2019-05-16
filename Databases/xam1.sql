@@ -126,3 +126,14 @@ create table GivenAnswers(
     constraint examidGA foreign key (examID) references Exam(examID),
     constraint qidGA foreign key (questionID) references Question(questionID)
 );
+
+insert into Student
+(studentID, firstname, lastname, email, phone, xamStatus, password)
+values
+('IT125', 'Iresh', 'Udara', 'iukrox@gmail.com', '0723454567', 'Registered', 'tharu2'),
+('IT126', 'Pasindu', 'Senarath', 'pas@gmail.com', '0776785674', 'Registered', 'single4life'),
+('IT127', 'Rajeewa', 'Harshana', 'focus@gmail.com', '0774536278', 'Registered', 'rajeewa69'),
+('IT128', 'Chamika', 'Danusekara', 'chamika@gmail.com', '0754566789', 'Registered', 'chamibada'),
+('IT129', 'Thanuja', 'Dilhan', 'ataya@gmail.com', '0743564781', 'Registered', 'scoobydoo'),
+('IT130', 'Fazlur', 'Rahman', 'fazl@gmail.com', '0710983967', 'Registered', 'lenovo'),
+('IT131', 'Roshan', 'Nizar', 'roshan.jr@gmail.com', '0774567388', 'Registered', 'shimra')

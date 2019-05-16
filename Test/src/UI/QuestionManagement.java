@@ -79,7 +79,7 @@ public class QuestionManagement extends JFrame {
 		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1295, 770);
+		setBounds(100, 100, 1295, 805);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -274,6 +274,19 @@ public class QuestionManagement extends JFrame {
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setBounds(1027, 665, 2, 35);
 		contentPane.add(separator);
+		
+		JButton btnCheckResults = new JButton("Check Results");
+		btnCheckResults.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new WrittenAnswersReview(ID, clientX, selectedSubjectID, selectedExamID).setVisible(true);
+				QuestionManagement.this.dispose();
+			}
+		});
+		btnCheckResults.setForeground(Color.WHITE);
+		btnCheckResults.setFont(new Font("Product Sans", Font.BOLD, 20));
+		btnCheckResults.setBackground(new Color(240, 128, 128));
+		btnCheckResults.setBounds(1041, 722, 236, 35);
+		contentPane.add(btnCheckResults);
 		setResizable(false);
 	}
 	
