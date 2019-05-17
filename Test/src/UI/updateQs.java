@@ -141,9 +141,9 @@ public class updateQs extends JFrame {
 		
 		JButton btnUpdQuestion = new JButton("Update Question");
 		btnUpdQuestion.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) { 
 				try {
-					temp.updateQnAns(QID, txtQ.getText(), txtCA.getText(), txtAA1.getText(), txtAA2.getText(), txtAA3.getText());
+					temp.updateQnAns(QID, txtQ.getText(), txtCA.getText(), txtAA1.getText(), txtAA2.getText(), txtAA3.getText()); //calls updateQnAns method in the SeverConnection Object via clientX object
 				} catch (RemoteException e) { 
 					// TODO Auto-generated catch block
 					e.printStackTrace();

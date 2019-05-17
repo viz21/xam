@@ -17,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
 
 import org.omg.CORBA.PRIVATE_MEMBER;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+
 import Connectivity.ClientX;
 import Connectivity.ConnectInterface;
 import jdk.internal.dynalink.beans.StaticClass;
@@ -138,6 +140,24 @@ public class ModuleSelection extends JFrame {
 		separator_1.setBounds(181, 98, 721, 2);
 		contentPane.add(separator_1);
 		
+		JButton btnSignOut = new JButton("Sign Out");
+		btnSignOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					new StartWindow().setVisible(true);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				ModuleSelection.this.dispose();
+			}
+		});
+		btnSignOut.setForeground(Color.WHITE);
+		btnSignOut.setFont(new Font("Product Sans", Font.BOLD, 20));
+		btnSignOut.setBackground(new Color(51, 153, 51));
+		btnSignOut.setBounds(12, 449, 151, 36);
+		contentPane.add(btnSignOut);
+		
 		setResizable(false);
 	}
 	
@@ -146,7 +166,7 @@ public class ModuleSelection extends JFrame {
 		model.setRowCount(0);
 		try {
 			String[][] results = new String[10][2];
-			results = temp.enrolledModules(this.uid);
+			results = temp.enrolledModules(this.uid); //calls enrolledModules method in the SeverConnection Object via clientX object
 			int j = 0;
 			for(int i = 0; i < 4; i++) {
 				model.addRow(new Object[] {results[i][j], results[i][j + 1]}); //Inserting Subject name and subjectID to the table

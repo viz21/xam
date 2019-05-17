@@ -134,9 +134,9 @@ public class WrittenAnswersReview extends JFrame {
 						} 
 				        for(int j=0 ; j<table.getColumnCount() ; j++) {
 				        	if (table.getModel().getValueAt(i, 5) == null || table.getModel().getValueAt(i, 5).equals("")) {
-				        		/*JOptionPane.showMessageDialog(null, "Please review every answer!", "Error", JOptionPane.WARNING_MESSAGE);
+				        		JOptionPane.showMessageDialog(null, "Please review every answer!", "Error", JOptionPane.WARNING_MESSAGE);
 				        		break1 = true;
-				        		break;*/
+				        		break;
 							}
 				        	results[i][0] = table.getModel().getValueAt(i, 0).toString(); // studentID
 				        	results[i][1] = table.getModel().getValueAt(i, 2).toString(); // questionID
@@ -144,7 +144,7 @@ public class WrittenAnswersReview extends JFrame {
 				        }
 				    }
 					if (!break1) {
-						temp.WrittenAnswerReviewSubmission(results);
+						temp.WrittenAnswerReviewSubmission(results); //calls WrittenAnswerReviewSubmission method in the SeverConnection Object via clientX object
 						JOptionPane.showMessageDialog(null, "Reviews submitted successfully!"); 
 					}
 				} catch (RemoteException e) {
@@ -181,7 +181,7 @@ public class WrittenAnswersReview extends JFrame {
 		model.setRowCount(0);
 		try {
 			String[][] results = new String[1000][6];
-			results = this.temp.WrittenAnswerReview(this.selectedExamID); // change this later
+			results = this.temp.WrittenAnswerReview(this.selectedExamID); //calls WrittenAnswerReview method in the SeverConnection Object via clientX object
 			for (int i = 0; i < results.length; i++) {
 				if(results[i][0] == null) {
 					break;

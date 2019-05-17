@@ -124,7 +124,7 @@ public class addNewQ extends JFrame {
 		btnAddQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					temp.addNewQ(selectedExamID, txtQ.getText(), txtCA.getText(), txtAA1.getText(), txtAA2.getText(), txtAA3.getText());
+					temp.addNewQ(selectedExamID, txtQ.getText(), txtCA.getText(), txtAA1.getText(), txtAA2.getText(), txtAA3.getText()); //calls addNewQ method in the SeverConnection Object via clientX object
 				} catch (RemoteException e) { 
 					// TODO Auto-generated catch block
 					e.printStackTrace();

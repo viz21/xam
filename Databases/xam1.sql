@@ -137,3 +137,15 @@ values
 ('IT129', 'Thanuja', 'Dilhan', 'ataya@gmail.com', '0743564781', 'Registered', 'scoobydoo'),
 ('IT130', 'Fazlur', 'Rahman', 'fazl@gmail.com', '0710983967', 'Registered', 'lenovo'),
 ('IT131', 'Roshan', 'Nizar', 'roshan.jr@gmail.com', '0774567388', 'Registered', 'shimra')
+
+insert into studentsubjects
+(studentID, subjectID)
+values
+('IT124', 'IT2030'),
+('IT125', 'IT2030'),
+('IT126', 'IT2030'),
+('IT127', 'IT2030'),
+('IT128', 'IT2030'),
+('IT129', 'IT2030'),
+('IT130', 'IT2030'),
+('IT131', 'IT2030')

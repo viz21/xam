@@ -18,24 +18,35 @@ import javax.swing.table.DefaultTableModel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import Connectivity.ClientX;
 
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.awt.event.ActionEvent;
 
 public class FinalResults extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	/*String ID = null;
+	String ID = null;
 	ClientX temp = null;
 	String selectedSubjectID = null;
-	String selectedExamID = null;*/
+	String selectedExamID = null;
 	
-	String tempExamID = "IT2030MID1";
-	ClientX temp = new ClientX();
+	/*String tempExamID = "IT2030MID1";
+	ClientX temp = new ClientX();*/
 	
 	int[][] grades4piechart = new int[5][1];
 	
@@ -46,11 +57,11 @@ public class FinalResults extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					/*String ID = null;
+					String ID = null;
 					ClientX clientX = null;
 					String selectedSubjectID = null;
-					String selectedExamID = null;*/
-					FinalResults frame = new FinalResults(/*ID, clientX, selectedSubjectID, selectedExamID*/);
+					String selectedExamID = null;
+					FinalResults frame = new FinalResults(ID, clientX, selectedSubjectID, selectedExamID);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,12 +73,12 @@ public class FinalResults extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FinalResults(/*String ID, ClientX clientX, String selectedSubjectID, String selectedExamID*/) {
+	public FinalResults(String ID, ClientX clientX, String selectedSubjectID, String selectedExamID) {
 
-		/*this.ID = ID;
+		this.ID = ID;
 		this.temp = clientX;
 		this.selectedSubjectID = selectedSubjectID;
-		this.selectedExamID = selectedExamID;*/
+		this.selectedExamID = selectedExamID;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1180, 827);
@@ -111,6 +122,38 @@ public class FinalResults extends JFrame {
 		this.modTable(table);
 		
 		JButton btnExportAsPdf = new JButton("Export as PDF");
+		btnExportAsPdf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					String output = "C:\\Users\\Vishwa\\Desktop\\XAM output\\results.pdf";
+		            Document doc = new Document();
+		            PdfWriter.getInstance(doc, new FileOutputStream(output));
+		            doc.open();
+		            PdfPTable pdfTable = new PdfPTable(table.getColumnCount());
+		            //adding table headers
+		            for (int i = 0; i < table.getColumnCount(); i++) {
+		                pdfTable.addCell(table.getColumnName(i));
+		            }
+		            //extracting data from the JTable and inserting it to PdfPTable
+		            for (int rows = 0; rows < 1000; rows++) {
+		                for (int cols = 0; cols < table.getColumnCount(); cols++) {
+		                	if (table.getModel().getValueAt(rows, cols) != null) {
+			                    pdfTable.addCell(table.getModel().getValueAt(rows, cols).toString());
+							}
+
+		                }
+		            }
+		            doc.add(pdfTable);
+		            doc.close();
+		            System.out.println("done");
+		        } catch (DocumentException e) {
+		            e.printStackTrace();
+		        } catch (FileNotFoundException e) {
+		            e.printStackTrace();
+		        }
+
+		    }
+		});
 		btnExportAsPdf.setForeground(Color.WHITE);
 		btnExportAsPdf.setFont(new Font("Product Sans", Font.BOLD, 20));
 		btnExportAsPdf.setBackground(new Color(240, 128, 128));
@@ -149,6 +192,15 @@ public class FinalResults extends JFrame {
 		contentPane.add(button);
 		
 		JButton btnSavePieChart = new JButton("Save Pie Chart");
+		btnSavePieChart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					ChartUtilities.saveChartAsJPEG(new File("C:\\Users\\Vishwa\\Desktop\\XAM output\\chart.jpeg"), chart, 600, 631);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+		});
 		btnSavePieChart.setForeground(Color.WHITE);
 		btnSavePieChart.setFont(new Font("Product Sans", Font.BOLD, 20));
 		btnSavePieChart.setBackground(new Color(240, 128, 128));
@@ -163,7 +215,7 @@ public class FinalResults extends JFrame {
 		model.setRowCount(0);
 		try {
 			String[][] results = new String[30][6];
-			results = temp.finalResults(this.tempExamID);
+			results = temp.finalResults(this.selectedExamID);
 			for(int i = 0; i < results.length; i++) {
 				model.addRow(new Object[] {results[i][0], results[i][1], results[i][2]});
 				if (results[i][2] != null) {

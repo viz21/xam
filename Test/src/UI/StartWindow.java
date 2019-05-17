@@ -128,6 +128,8 @@ public class StartWindow extends JFrame {
 		btnToNewAccountWindow.setBorderPainted(false);
 		btnToNewAccountWindow.setOpaque(false);
 		
+		btnToNewAccountWindow.setVisible(false);
+		
 		contentPane.add(btnToNewAccountWindow);
 		
 		/*Create new Client

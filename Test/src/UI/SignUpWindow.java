@@ -26,6 +26,9 @@ import javax.swing.ImageIcon;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPasswordField;
 
+/*Not an important class anymore
+ * Not being used in the system*/
+
 public class SignUpWindow extends JFrame {
 
 	private JPanel contentPane;
