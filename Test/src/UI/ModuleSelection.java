@@ -30,7 +30,7 @@ import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
-
+/*@author Vishwa*/
 public class ModuleSelection extends JFrame {
 
 	private JPanel contentPane;

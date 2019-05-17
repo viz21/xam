@@ -18,6 +18,10 @@ import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.awt.event.ActionEvent;
 
+/*@author Vishwa
+ * 
+ * */
+
 public class updateQs extends JFrame {
 
 	private JPanel contentPane;
