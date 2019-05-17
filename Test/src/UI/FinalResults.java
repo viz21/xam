@@ -125,7 +125,7 @@ public class FinalResults extends JFrame {
 		btnExportAsPdf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					String output = "C:\\Users\\Vishwa\\Desktop\\XAM output\\results.pdf";
+					String output = "C:\\Users\\Vishwa\\Desktop\\XAM output\\results.pdf"; //The directory, for the pdf to be saved
 		            Document doc = new Document();
 		            PdfWriter.getInstance(doc, new FileOutputStream(output));
 		            doc.open();
@@ -195,7 +195,7 @@ public class FinalResults extends JFrame {
 		btnSavePieChart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					ChartUtilities.saveChartAsJPEG(new File("C:\\Users\\Vishwa\\Desktop\\XAM output\\chart.jpeg"), chart, 600, 631);
+					ChartUtilities.saveChartAsJPEG(new File("C:\\Users\\Vishwa\\Desktop\\XAM output\\chart.jpeg"), chart, 600, 631); //The directory, for the pie chart JPG to be saved
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
@@ -215,7 +215,7 @@ public class FinalResults extends JFrame {
 		model.setRowCount(0);
 		try {
 			String[][] results = new String[30][6];
-			results = temp.finalResults(this.selectedExamID);
+			results = temp.finalResults(this.selectedExamID); //calls finalResults method in the SeverConnection Object via clientX object
 			for(int i = 0; i < results.length; i++) {
 				model.addRow(new Object[] {results[i][0], results[i][1], results[i][2]});
 				if (results[i][2] != null) {

@@ -154,7 +154,7 @@ public class QuestionManagement extends JFrame {
 					JOptionPane.showMessageDialog(null, "Cannot add anymore questions", "Error", JOptionPane.WARNING_MESSAGE);
 				}
 				else {
-					new addNewQ(temp, selectedExamID).setVisible(true);
+					new addNewQ(temp, selectedExamID).setVisible(true); 
 				}
 			}
 		});
@@ -198,7 +198,7 @@ public class QuestionManagement extends JFrame {
 			public void actionPerformed(ActionEvent arg0) { //Deletes the question and answers
 				String QID = table.getModel().getValueAt(table.getSelectedRow(), 0).toString();
 				
-				int a = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this entry?");
+				int a = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this entry?"); 
 	            if(a == JOptionPane.YES_OPTION){
 	                try {
 						temp.deleteQuestion(QID);
@@ -295,7 +295,7 @@ public class QuestionManagement extends JFrame {
 		model.setRowCount(0);
 		try {
 			String[][] results = new String[30][6];
-			results = temp.viewQsNAns(selectedExamID);
+			results = temp.viewQsNAns(selectedExamID); //calls viewQsNAns method in the SeverConnection Object via clientX object
 			numberOfQs = 0; // 
 			for(int i = 0; i < 30; i++) {
 				model.addRow(new Object[] {results[i][0], results[i][1], results[i][2], results[i][3], results[i][4], results[i][5]});

@@ -33,12 +33,24 @@ import javax.swing.JPasswordField;
 
 import Connectivity.*;
 
+/*Starts the system using this class
+ * 
+ * Referenced Libraries and .jar files to this system are 
+ * 
+ * mysql-connector-java-8.0.12.jar
+ * jcommon-1.0.23.jar
+ * jfreechart-1.0.19.jar
+ * itextpdf-5.4.2.jar
+ * 
+ * @author Vishwa
+ * */
+
 public class StartWindow extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtUID;
 	private JPasswordField passwordField;
-	ClientX clientx = new ClientX();
+	ClientX clientx = new ClientX(); //This is where the ClientX object is first created. This object is passed through all the other classes
 
 	/**
 	 * Launch the application.
@@ -132,9 +144,7 @@ public class StartWindow extends JFrame {
 		
 		contentPane.add(btnToNewAccountWindow);
 		
-		/*Create new Client
-		 * here
-		 * below*/
+		
 		
 		
 		
@@ -159,10 +169,11 @@ public class StartWindow extends JFrame {
 		passwordField.setBounds(480, 311, 311, 38);
 		contentPane.add(passwordField);
 		
-		
+
+		/*The button click triggers the method signIn in ClientX
+		 * which triggers the method signIn in the stub object, ServerConnection
+		 * */
 		btnSignIn.addActionListener(new ActionListener() {
-			/*The button click triggers the method signIn in ClientX
-			 * which triggers the method signIn in the stub object, ServerConnection*/
 			public void actionPerformed(ActionEvent e) {
 				
 				String type = ComboUser.getSelectedItem().toString();
@@ -171,9 +182,9 @@ public class StartWindow extends JFrame {
 				
 				try {
 
-					String ID = clientx.signIn(type, uid, password);
+					String ID = clientx.signIn(type, uid, password); // calls signin method in the SeverConnection Object via clientX object
 					if (!ID.equals("Error")) {
-						new ModuleSelection(uid, clientx).setVisible(true);
+						new ModuleSelection(uid, clientx).setVisible(true); //Next class, ModuleSelection
 						StartWindow.this.dispose();
 					}
 					else {

@@ -6,6 +6,12 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.sql.SQLException;
 
+/*This class fetches the RMI object
+ * The methods here are to call the methods from the fetched ServerConnection Object
+ * Also creates a ConnectInterface objects and assigns it to the fetched ServerConnection Object
+ * @author Vishwa
+ * */
+
 public class ClientX {
 	
 	ConnectInterface temp;
